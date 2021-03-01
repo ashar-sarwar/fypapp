@@ -1,77 +1,127 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AudioRecorderPlayer from 'react-native-audio-recorder-player';
-
+import AudioRecorderPlayer, {
+  AVEncoderAudioQualityIOSType,
+  AVEncodingOption,
+  AudioEncoderAndroidType,
+  AudioSet,
+  AudioSourceAndroidType,
+} from 'react-native-audio-recorder-player';
 import VoiceRecorderView from './VoiceRecorderView';
 import {connect} from 'react-redux';
 import {Platform} from 'react-native';
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 class VoiceRecorderController extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      recordSecs: 9,
-      recordTime: '',
-      currentPositionSec: '',
-      currentDurationSec: '',
-      playTime: 0,
-      duration: 0,
+      recordSecs: 0,
+
+      recordTime: '00:00:00',
+
+      currentPositionSec: 0,
+
+      currentDurationSec: 0,
+
+      playTime: '00:00:00',
+
+      duration: '00:00:00',
     };
+
+    this.audioRecorderPlayer = new AudioRecorderPlayer();
+
+    this.audioRecorderPlayer.setSubscriptionDuration(0.09); // optional. Default is 0.1
   }
 
-  onStartRecord = async () => {
-    const path = Platform.select({
-      ios: 'hello.m4a',
-      android: 'sdcard/hello.mp4', // should give extra dir name in android. Won't grant permission to the first level of dir.
-    });
-    const result = await audioRecorderPlayer.startRecorder(path);
+  static propTypes = {};
+  static defaultProps = {};
 
-    audioRecorderPlayer.addRecordBackListener(e => {
+  onStartRecord = async () => {
+    const path = 'sdcard/hello.mp4';
+
+    const audioSet = {
+      AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+
+      AudioSourceAndroid: AudioSourceAndroidType.MIC,
+
+      AVEncoderAudioQualityKeyIOS: AVEncoderAudioQualityIOSType.high,
+
+      AVNumberOfChannelsKeyIOS: 2,
+
+      AVFormatIDKeyIOS: AVEncodingOption.aac,
+    };
+
+    console.log('audioSet', audioSet);
+
+    const uri = await this.audioRecorderPlayer.startRecorder(path, audioSet);
+
+    this.audioRecorderPlayer.addRecordBackListener(e => {
       this.setState({
         recordSecs: e.current_position,
-        recordTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+
+        recordTime: this.audioRecorderPlayer.mmssss(
+          Math.floor(e.current_position),
+        ),
       });
-      return;
     });
-    console.log(result);
+
+    console.log(`uri: ${uri}`);
   };
 
   onStopRecord = async () => {
-    const result = await audioRecorderPlayer.stopRecorder();
-    audioRecorderPlayer.removeRecordBackListener();
+    const result = await this.audioRecorderPlayer.stopRecorder();
+
+    this.audioRecorderPlayer.removeRecordBackListener();
+
     this.setState({
       recordSecs: 0,
     });
+
     console.log(result);
   };
-
-  onStartPlay = async () => {
+  onStartPlay = async e => {
     console.log('onStartPlay');
-    const msg = await audioRecorderPlayer.startPlayer();
+
+    const path = 'sdcard/hello.mp4';
+
+    const msg = await this.audioRecorderPlayer.startPlayer(path);
+
+    this.audioRecorderPlayer.setVolume(1.0);
+
     console.log(msg);
-    audioRecorderPlayer.addPlayBackListener(e => {
+
+    this.audioRecorderPlayer.addPlayBackListener(e => {
+      if (e.current_position === e.duration) {
+        console.log('finished');
+
+        this.audioRecorderPlayer.stopPlayer();
+      }
+
       this.setState({
         currentPositionSec: e.current_position,
+
         currentDurationSec: e.duration,
-        playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
-        duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+
+        playTime: this.audioRecorderPlayer.mmssss(
+          Math.floor(e.current_position),
+        ),
+
+        duration: this.audioRecorderPlayer.mmssss(Math.floor(e.duration)),
       });
-      return;
     });
   };
 
-  onPausePlay = async () => {
-    await audioRecorderPlayer.pausePlayer();
+  onPausePlay = async e => {
+    await this.audioRecorderPlayer.pausePlayer();
   };
 
   onStopPlay = async () => {
     console.log('onStopPlay');
-    audioRecorderPlayer.stopPlayer();
-    audioRecorderPlayer.removePlayBackListener();
+    this.audioRecorderPlayer.stopPlayer();
+    this.audioRecorderPlayer.removePlayBackListener();
   };
-  static propTypes = {};
-  static defaultProps = {};
 
   render() {
     const {
