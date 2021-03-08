@@ -1,22 +1,38 @@
 // @flow
 
-import { Platform } from "react-native";
+import {Platform} from 'react-native';
 
 const type = {
   /* base: "ParalucentText-Book",
   medium: "Paralucent-Medium" */
+  light: Platform.select({
+    ios: 'Montserrat-Light',
+    android: 'Montserrat-Light',
+  }),
   base: Platform.select({
-    ios: "Helvetica Neue",
-    android: "Roboto"
+    ios: 'Montserrat-Regular',
+    android: 'Montserrat-Regular',
+  }),
+  medium: Platform.select({
+    ios: 'Montserrat-Medium',
+    android: 'Montserrat-Medium',
+  }),
+  semiBold: Platform.select({
+    ios: 'Montserrat-SemiBold',
+    android: 'Montserrat-SemiBold',
   }),
   bold: Platform.select({
-    ios: "HelveticaNeue-Medium",
-    android: "Roboto"
+    ios: 'Montserrat-Bold',
+    android: 'Montserrat-Bold',
+  }),
+  extraBold: Platform.select({
+    ios: 'Montserrat-ExtraBold',
+    android: 'Montserrat-ExtraBold',
   }),
   italic: Platform.select({
-    ios: "HelveticaNeue-Italic",
-    android: "Roboto"
-  })
+    ios: 'Montserrat-Italic',
+    android: 'Montserrat-Italic',
+  }),
 };
 
 // Metrics.generatedFontSize(ios, android)
@@ -33,10 +49,10 @@ const size = {
   xLarge: 24,
   xxLarge: 30,
   xxxLarge: 36,
-  xxxxLarge: 40
+  xxxxLarge: 40,
 };
 
 export default {
   type,
-  size
+  size,
 };

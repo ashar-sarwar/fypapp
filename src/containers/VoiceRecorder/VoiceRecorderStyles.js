@@ -10,6 +10,15 @@ export default StyleSheet.create({
 
   buttonWrap: {
     marginBottom: Metrics.baseMargin,
-    padding: Metrics.doubleBaseMargin,
+    borderRadius: 10,
+    paddingVertical: Metrics.baseMargin,
+    paddingHorizontal: Metrics.doubleBaseMargin,
+    width: '60%',
+    backgroundColor: '#FFFAFA',
+  },
+
+  btnText: {
+    color: 'black',
+    textAlign: 'center',
   },
 });
