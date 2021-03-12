@@ -12,8 +12,7 @@ export default StyleSheet.create({
     marginBottom: Metrics.baseMargin,
     borderRadius: 10,
     paddingVertical: Metrics.baseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin,
-    width: '60%',
+    paddingHorizontal: Metrics.screenWidth / 5,
     backgroundColor: '#FFFAFA',
   },
 

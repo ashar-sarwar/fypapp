@@ -1,10 +1,9 @@
 import React from 'react';
-import {View, Image as RnImage} from 'react-native';
+import {View, Image as RnImage, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text} from '../../components';
 import styles from './VoiceRecorderStyles';
-import {TouchableOpacity} from 'react-native';
-import {Fonts, AppStyles, Metrics} from '../../theme';
+import {Fonts, AppStyles, Metrics, Images} from '../../theme';
 export default function VoiceRecorderView(props) {
   const {
     recordSecs,
@@ -18,6 +17,8 @@ export default function VoiceRecorderView(props) {
     onStartPlay,
     onPausePlay,
     onStopPlay,
+    handleVoiceRecording,
+    setValue,
   } = props;
   console.log({recordSecs});
   console.log({recordTime});
@@ -33,22 +34,54 @@ export default function VoiceRecorderView(props) {
       start={{x: 1.1, y: -1.2}}
       end={{x: -3.3, y: -0.9}}
       style={styles.container}>
-      <View style={AppStyles.mTop25}>
+      <View style={[AppStyles.mTop25, {paddingHorizontal: Metrics.baseMargin}]}>
         <Text
-          size={Fonts.size.xxLarge}
+          size={Fonts.size.xxxLarge}
           style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
-          COVID COUGH RECORDER
+          COVID COUGH TESTER
         </Text>
       </View>
       <View
         style={{
-          marginTop: Metrics.doubleBaseMargin,
           flex: 1,
           alignItems: 'center',
         }}>
-        <Text style={{top: 10, color: 'white'}}>{`${recordTime}`}</Text>
+        <View
+          style={[
+            AppStyles.flex,
+            {
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: Metrics.doubleBaseMargin,
+            },
+          ]}>
+          <TouchableOpacity
+            onPress={() => {
+              setValue(
+                {isIconActive: !props.isIconActive},
+                handleVoiceRecording(),
+              );
+            }}
+            style={{
+              opacity: props.isIconActive ? 0.4 : 1,
+              backgroundColor: 'red',
+              borderRadius: 100,
+              height: 160,
+              width: 160,
+              alignItems: 'center',
+            }}>
+            <RnImage
+              source={Images.RecordIcon}
+              style={{width: 70, height: 70, top: 50}}
+              tintColor={'white'}
+            />
+          </TouchableOpacity>
+          <Text
+            style={{top: 10, color: 'white'}}
+            size={Fonts.size.xxLarge}
+            type={'semiBold'}>{`${recordTime}`}</Text>
 
-        <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={onStartRecord}
           style={[styles.buttonWrap, {borderWidth: 2, marginTop: 20}]}>
           <Text style={styles.btnText} type="semiBold">
@@ -62,12 +95,12 @@ export default function VoiceRecorderView(props) {
           <Text style={styles.btnText} type="semiBold">
             Stop Recorder
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <Text
-          style={{top: 12, color: 'white'}}>{`${playTime} / ${duration}`}</Text>
+          {/* <Text
+          style={{top: 12, color: 'white'}}>{`${playTime} / ${duration}`}</Text> */}
 
-        <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={onStartPlay}
           style={[
             styles.buttonWrap,
@@ -76,14 +109,20 @@ export default function VoiceRecorderView(props) {
           <Text style={styles.btnText} type="semiBold">
             Start Player
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={onStopPlay}
-          style={[styles.buttonWrap, {borderWidth: 2}]}>
-          <Text style={styles.btnText} type="semiBold">
-            Stop Player
-          </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        </View>
+        <View style={AppStyles.mBottom25}>
+          <TouchableOpacity
+            onPress={onPausePlay}
+            style={[styles.buttonWrap, {borderWidth: 2}]}>
+            <Text
+              style={styles.btnText}
+              type="semiBold"
+              size={Fonts.size.medium}>
+              Diagnose
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
   );
