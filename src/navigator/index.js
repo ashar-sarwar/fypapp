@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import {connect} from 'react-redux';
-import {Stack, Scene, Router, Actions} from 'react-native-router-flux';
+import {Stack, Scene, Router, Actions, Drawer} from 'react-native-router-flux';
 
 import styles from './styles';
 import {Colors} from '../theme';
 
 import {Login, Welcome, VoiceRecorder} from '../containers';
+import {SideBar} from '../components';
 
 function onBackPress() {
   if (Actions.state.index === 0) {
@@ -22,10 +23,19 @@ const navigator = Actions.create(
     titleStyle={styles.title}
     headerStyle={styles.header}
     headerTintColor={Colors.navbar.text}>
-    <Scene key="voiceRecorder" component={VoiceRecorder} hideNavBar initial />
+    <Drawer
+      drawer
+      key="drawerMenu"
+      contentComponent={SideBar}
+      drawerWidth={267}
+      side={'left'}
+      hideNavBar>
+      <Scene key="home" component={VoiceRecorder} hideNavBar />
+    </Drawer>
+
     <Scene key="login" component={Login} hideNavBar />
 
-    <Scene key="welcome" component={Welcome} hideNavBar />
+    <Scene key="welcome" component={Welcome} initial />
   </Stack>,
 );
 

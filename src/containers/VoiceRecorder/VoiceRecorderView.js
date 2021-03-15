@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Text} from '../../components';
 import styles from './VoiceRecorderStyles';
 import {Fonts, AppStyles, Metrics, Images} from '../../theme';
+import {Actions} from 'react-native-router-flux';
 export default function VoiceRecorderView(props) {
   const {
     recordSecs,
@@ -19,6 +20,7 @@ export default function VoiceRecorderView(props) {
     onStopPlay,
     handleVoiceRecording,
     setValue,
+    showPlayButton,
   } = props;
   console.log({recordSecs});
   console.log({recordTime});
@@ -34,6 +36,9 @@ export default function VoiceRecorderView(props) {
       start={{x: 1.1, y: -1.2}}
       end={{x: -3.3, y: -0.9}}
       style={styles.container}>
+      <TouchableOpacity onPress={() => Actions.drawerOpen()}>
+        <RnImage source={Images.BaselineIcon} style={{width: 27, height: 27}} />
+      </TouchableOpacity>
       <View style={[AppStyles.mTop25, {paddingHorizontal: Metrics.baseMargin}]}>
         <Text
           size={Fonts.size.xxxLarge}
@@ -111,10 +116,35 @@ export default function VoiceRecorderView(props) {
           </Text>
         </TouchableOpacity> */}
         </View>
-        <View style={AppStyles.mBottom25}>
+
+        <LinearGradient
+          colors={['#00FF00', '#006400', 'transparent', 'transparent']}
+          start={{x: 1.8, y: 0.9}}
+          end={{x: -3.9, y: -0.1}}
+          style={[AppStyles.mBottom20, {borderRadius: 10, borderWidth: 2}]}>
           <TouchableOpacity
-            onPress={onPausePlay}
-            style={[styles.buttonWrap, {borderWidth: 2}]}>
+            disabled={!(showPlayButton && recordSecs === 0)}
+            onPress={onStartPlay}
+            style={[
+              !(showPlayButton && recordSecs === 0) && {opacity: 0.3},
+              {
+                width: Metrics.screenWidth / 1.2,
+                height: 60,
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+            ]}>
+            <Text
+              style={[styles.btnText, {color: 'white'}]}
+              type="semiBold"
+              size={Fonts.size.xLarge}>
+              Play
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+
+        <View style={AppStyles.mBottom25}>
+          <TouchableOpacity style={[styles.buttonWrap, {borderWidth: 2}]}>
             <Text
               style={styles.btnText}
               type="semiBold"

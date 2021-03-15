@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import { Provider } from "react-redux";
-import { AppRegistry, View } from "react-native";
-import { MessageBar } from "./components";
-import configureStore from "./store";
-import AppNavigator from "./navigator";
-import applyConfigSettings from "./config";
-import AppStyles from "./theme/AppStyles";
+import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import {AppRegistry, View} from 'react-native';
+import {MessageBar} from './components';
+import configureStore from './store';
+import AppNavigator from './navigator';
+import applyConfigSettings from './config';
+import AppStyles from './theme/AppStyles';
 
-const reducers = require("./reducers").default;
+const reducers = require('./reducers').default;
 
 applyConfigSettings();
 
@@ -17,8 +17,8 @@ export default class App extends Component {
     isLoading: true,
     store: configureStore(reducers, () => {
       this._loadingCompleted();
-      this.setState({ isLoading: false });
-    })
+      this.setState({isLoading: false});
+    }),
   };
 
   _loadingCompleted() {
@@ -43,4 +43,4 @@ export default class App extends Component {
   }
 }
 
-AppRegistry.registerComponent("AutoConnect", () => App);
+AppRegistry.registerComponent('AutoConnect', () => App);

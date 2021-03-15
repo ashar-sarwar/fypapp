@@ -30,6 +30,7 @@ class VoiceRecorderController extends React.Component {
       duration: '00:00:00',
 
       isIconActive: false,
+      showPlayButton: false,
     };
 
     this.audioRecorderPlayer = new AudioRecorderPlayer();
@@ -62,7 +63,7 @@ class VoiceRecorderController extends React.Component {
     this.audioRecorderPlayer.addRecordBackListener(e => {
       this.setState({
         recordSecs: e.current_position,
-
+        showPlayButton: false,
         recordTime: this.audioRecorderPlayer.mmssss(
           Math.floor(e.current_position),
         ),
@@ -78,6 +79,7 @@ class VoiceRecorderController extends React.Component {
     this.audioRecorderPlayer.removeRecordBackListener();
 
     this.setState({
+      showPlayButton: true,
       recordSecs: 0,
     });
 
@@ -130,6 +132,7 @@ class VoiceRecorderController extends React.Component {
     if (this.state.isIconActive) {
       this.onStopRecord();
     } else {
+      this.onStopPlay();
       this.onStartRecord();
     }
   };
@@ -146,6 +149,7 @@ class VoiceRecorderController extends React.Component {
       currentDurationSec,
       playTime,
       duration,
+      showPlayButton,
     } = this.state;
     return (
       <VoiceRecorderView
@@ -155,6 +159,7 @@ class VoiceRecorderController extends React.Component {
         currentDurationSec={currentDurationSec}
         playTime={playTime}
         duration={duration}
+        showPlayButton={showPlayButton}
         isIconActive={this.state.isIconActive}
         setValue={this.setValue}
         handleVoiceRecording={this.handleVoiceRecording}

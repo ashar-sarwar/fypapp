@@ -14,6 +14,7 @@ export default StyleSheet.create({
     paddingVertical: Metrics.baseMargin,
     paddingHorizontal: Metrics.screenWidth / 5,
     backgroundColor: '#FFFAFA',
+    width: Metrics.screenWidth / 1.2,
   },
 
   btnText: {
