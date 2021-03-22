@@ -5,9 +5,7 @@ import {Colors, Metrics, AppStyles} from '../../theme';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    // padding: Metrics.baseMargin,
-    backgroundColor: Colors.grey6,
-    ...AppStyles.centerInner,
+    width: '100%',
   },
   image: {width: 250, height: 290, marginBottom: 70},
 });

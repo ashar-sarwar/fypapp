@@ -1,9 +1,11 @@
 import React from 'react';
+import _ from 'lodash';
 import {Keyboard} from 'react-native';
 import PropTypes from 'prop-types';
 import LoginView from './LoginView';
 import {connect} from 'react-redux';
 import util from '../../util';
+import { Actions } from 'react-native-router-flux';
 
 class LoginController extends React.Component {
   constructor() {

@@ -144,6 +144,10 @@ class Util {
     final = final.slice(0, -1);
     return final;
   }
+
+  isRequiredErrorMessage(fieldName) {
+    return `${this.capitalizeFirstLetter(fieldName)} is required`;
+  }
 }
 
 export default new Util();

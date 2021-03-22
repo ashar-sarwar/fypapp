@@ -2,13 +2,14 @@
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {View, Image, StatusBar} from 'react-native';
+import {View, Image as RnImage, StatusBar, ImageBackground} from 'react-native';
 import PropTypes from 'prop-types';
 import {Actions} from 'react-native-router-flux';
 
-import {Images, Colors} from '../../theme';
+import {Images, Colors, AppStyles} from '../../theme';
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+import Text from './../../components/Text/index';
 
 class Welcome extends Component {
   static propTypes = {
@@ -20,18 +21,37 @@ class Welcome extends Component {
 
     setTimeout(() => {
       Actions.reset('drawerMenu');
-    }, 8);
+    }, 1000);
   }
 
   render() {
     return (
       <>
         <StatusBar hidden={true} />
-        <LinearGradient
-          colors={['#002286', '#f8446f']}
-          start={{x: 1.1, y: -1.2}}
-          end={{x: -3.3, y: -0.9}}
-          style={styles.container}></LinearGradient>
+        <ImageBackground
+          source={Images.SplashScreenBackground}
+          style={[styles.container]}>
+          <View></View>
+        </ImageBackground>
+        <View
+          style={{
+            position: 'absolute',
+            top: 180,
+
+            bottom: 100,
+            width: '100%',
+          }}>
+          <RnImage
+            source={Images.SplashImage}
+            style={{
+              height: '120%',
+              width: '120%',
+              right: 70,
+              overflow: 'hidden',
+              zIndex: 999,
+            }}
+          />
+        </View>
       </>
     );
   }

@@ -1,16 +1,16 @@
 // @flow
-import _ from "lodash";
-import React from "react";
-import PropTypes from "prop-types";
+import _ from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   TextInput as RNTextInput,
   ViewPropTypes,
   View,
-  Image
-} from "react-native";
-import { Text, ButtonView } from "../";
-import { Colors, AppStyles, Images } from "../../theme";
-import styles from "./styles";
+  Image,
+} from 'react-native';
+import {Text, ButtonView} from '../';
+import {Colors, AppStyles, Images} from '../../theme';
+import styles from './styles';
 
 export default class TextInput extends React.PureComponent {
   static propTypes = {
@@ -18,15 +18,15 @@ export default class TextInput extends React.PureComponent {
     error: PropTypes.string,
     containerStyle: ViewPropTypes.style,
     onPress: PropTypes.func,
-    multiline: PropTypes.bool
+    multiline: PropTypes.bool,
   };
 
   static defaultProps = {
-    error: "",
-    label: "",
+    error: '',
+    label: '',
     containerStyle: {},
     onPress: null,
-    multiline: false
+    multiline: false,
   };
 
   focus() {
@@ -48,7 +48,7 @@ export default class TextInput extends React.PureComponent {
     } = this.props;
     return (
       <View style={containerStyle}>
-        <Text color={Colors.grey2} style={AppStyles.mTop10}>
+        <Text color={Colors.white} style={AppStyles.mTop10}>
           {label}
         </Text>
 
@@ -77,9 +77,8 @@ export default class TextInput extends React.PureComponent {
           <Text
             type="medium"
             size="small"
-            color={Colors.red}
-            style={[AppStyles.mTop5, AppStyles.mBottom5]}
-          >
+            color={Colors.white}
+            style={[AppStyles.mTop5, AppStyles.mBottom5]}>
             {error}
           </Text>
         )}

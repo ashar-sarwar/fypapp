@@ -32,9 +32,9 @@ export default function VoiceRecorderView(props) {
 
   return (
     <LinearGradient
-      colors={['#002286', '#f8446f']}
-      start={{x: 1.1, y: -1.2}}
-      end={{x: -3.3, y: -0.9}}
+      colors={['#FF0000', '#000000']}
+      start={{x: 2.1, y: -2.01}}
+      end={{x: -1.3, y: -1.9}}
       style={styles.container}>
       <TouchableOpacity onPress={() => Actions.drawerOpen()}>
         <RnImage source={Images.BaselineIcon} style={{width: 27, height: 27}} />
@@ -69,7 +69,7 @@ export default function VoiceRecorderView(props) {
             }}
             style={{
               opacity: props.isIconActive ? 0.4 : 1,
-              backgroundColor: 'red',
+              backgroundColor: 'black',
               borderRadius: 100,
               height: 160,
               width: 160,
@@ -118,10 +118,13 @@ export default function VoiceRecorderView(props) {
         </View>
 
         <LinearGradient
-          colors={['#00FF00', '#006400', 'transparent', 'transparent']}
-          start={{x: 1.8, y: 0.9}}
-          end={{x: -3.9, y: -0.1}}
-          style={[AppStyles.mBottom20, {borderRadius: 10, borderWidth: 2}]}>
+          colors={['#000000', '#FFFFFF']}
+          start={{x: 1.8, y: -1.9}}
+          end={{x: !(showPlayButton && recordSecs === 0) ? -3.9 : 8, y: -7.9}}
+          style={[
+            AppStyles.mBottom20,
+            {borderRadius: 10, borderWidth: 2, zIndex: 999},
+          ]}>
           <TouchableOpacity
             disabled={!(showPlayButton && recordSecs === 0)}
             onPress={onStartPlay}
@@ -144,7 +147,9 @@ export default function VoiceRecorderView(props) {
         </LinearGradient>
 
         <View style={AppStyles.mBottom25}>
-          <TouchableOpacity style={[styles.buttonWrap, {borderWidth: 2}]}>
+          <TouchableOpacity
+            style={[styles.buttonWrap, {borderWidth: 2}]}
+            activeOpacity={0.8}>
             <Text
               style={styles.btnText}
               type="semiBold"

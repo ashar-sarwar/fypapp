@@ -32,11 +32,11 @@ const navigator = Actions.create(
       hideNavBar>
       <Scene key="home" component={VoiceRecorder} hideNavBar />
     </Drawer>
-    <Scene key="signup" component={Signup} hideNavBar initial />
+    <Scene key="signup" component={Signup} hideNavBar />
 
     <Scene key="login" component={Login} hideNavBar />
 
-    <Scene key="welcome" component={Welcome} />
+    <Scene key="welcome" component={Welcome} initial />
   </Stack>,
 );
 
