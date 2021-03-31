@@ -154,7 +154,7 @@ export default function SignupView(props) {
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  Actions.login();
+                  Actions.replace('login');
                 }}
                 style={AppStyles.mRight5}>
                 <Text

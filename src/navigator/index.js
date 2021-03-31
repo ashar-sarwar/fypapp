@@ -36,7 +36,7 @@ const navigator = Actions.create(
 
     <Scene key="login" component={Login} hideNavBar />
 
-    <Scene key="welcome" component={Welcome} initial />
+    <Scene key="welcome" component={Welcome} initial hideNavBar />
   </Stack>,
 );
 

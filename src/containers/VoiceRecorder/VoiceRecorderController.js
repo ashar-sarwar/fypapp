@@ -1,4 +1,6 @@
 import React from 'react';
+
+import util from '../../util';
 import PropTypes from 'prop-types';
 import AudioRecorderPlayer, {
   AVEncoderAudioQualityIOSType,
@@ -40,6 +42,10 @@ class VoiceRecorderController extends React.Component {
 
   static propTypes = {};
   static defaultProps = {};
+
+  componentDidMount() {
+    util.audioRecord();
+  }
 
   onStartRecord = async () => {
     const path = 'sdcard/hello.mp4';

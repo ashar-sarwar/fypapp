@@ -23,21 +23,21 @@ export default function SideBarView(props) {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[AppStyles.flex, {marginTop: 20}]}>
-          <View style={styles.itemWrap}>
+          {/* <View style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               About
             </Text>
-          </View>
+          </View> */}
           <View style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               Our Mission
             </Text>
           </View>
-          <View style={styles.itemWrap}>
+          {/* <View style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               Contact Us
             </Text>
-          </View>
+          </View> */}
           <TouchableOpacity
             onPress={() => Actions.login()}
             style={styles.itemWrap}>

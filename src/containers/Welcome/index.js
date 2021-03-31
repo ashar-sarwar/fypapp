@@ -8,8 +8,6 @@ import {Actions} from 'react-native-router-flux';
 
 import {Images, Colors, AppStyles} from '../../theme';
 import styles from './styles';
-import LinearGradient from 'react-native-linear-gradient';
-import Text from './../../components/Text/index';
 
 class Welcome extends Component {
   static propTypes = {
@@ -21,7 +19,7 @@ class Welcome extends Component {
 
     setTimeout(() => {
       Actions.reset('drawerMenu');
-    }, 1000);
+    }, 2500);
   }
 
   render() {

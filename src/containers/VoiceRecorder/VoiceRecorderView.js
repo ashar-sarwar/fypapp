@@ -85,36 +85,6 @@ export default function VoiceRecorderView(props) {
             style={{top: 10, color: 'white'}}
             size={Fonts.size.xxLarge}
             type={'semiBold'}>{`${recordTime}`}</Text>
-
-          {/* <TouchableOpacity
-          onPress={onStartRecord}
-          style={[styles.buttonWrap, {borderWidth: 2, marginTop: 20}]}>
-          <Text style={styles.btnText} type="semiBold">
-            Start Recorder
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={onStopRecord}
-          style={[styles.buttonWrap, {borderWidth: 2}]}>
-          <Text style={styles.btnText} type="semiBold">
-            Stop Recorder
-          </Text>
-        </TouchableOpacity> */}
-
-          {/* <Text
-          style={{top: 12, color: 'white'}}>{`${playTime} / ${duration}`}</Text> */}
-
-          {/* <TouchableOpacity
-          onPress={onStartPlay}
-          style={[
-            styles.buttonWrap,
-            {borderWidth: 2, marginTop: Metrics.doubleBaseMargin},
-          ]}>
-          <Text style={styles.btnText} type="semiBold">
-            Start Player
-          </Text>
-        </TouchableOpacity> */}
         </View>
 
         <LinearGradient
