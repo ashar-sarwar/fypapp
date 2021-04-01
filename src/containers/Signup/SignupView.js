@@ -38,6 +38,17 @@ export default function SignupView(props) {
         <KeyboardAwareScrollView
           keyboardShouldPersistTaps="always"
           showsVerticalScrollIndicator={false}>
+          <View
+            style={{
+              alignItems: 'center',
+              marginBottom: 100,
+              marginTop: 30,
+              marginRight: 7,
+            }}>
+            <Text color={Colors.white} size={Fonts.size.xxxxLarge} type="bold">
+              CHECKOVID
+            </Text>
+          </View>
           <View style={{flex: 1, justifyContent: 'flex-end', marginBottom: 50}}>
             <View style={{paddingHorizontal: 38}}>
               <View style={AppStyles.mBottom20}>

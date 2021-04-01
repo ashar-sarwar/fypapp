@@ -6,7 +6,7 @@ import {Stack, Scene, Router, Actions, Drawer} from 'react-native-router-flux';
 import styles from './styles';
 import {Colors} from '../theme';
 
-import {Login, Welcome, VoiceRecorder, Signup} from '../containers';
+import {Login, Welcome, VoiceRecorder, Signup, OurMission} from '../containers';
 import {SideBar} from '../components';
 
 function onBackPress() {
@@ -35,6 +35,8 @@ const navigator = Actions.create(
     <Scene key="signup" component={Signup} hideNavBar />
 
     <Scene key="login" component={Login} hideNavBar />
+
+    <Scene key="ourMission" component={OurMission} hideNavBar />
 
     <Scene key="welcome" component={Welcome} initial hideNavBar />
   </Stack>,

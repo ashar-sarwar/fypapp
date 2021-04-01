@@ -28,11 +28,13 @@ export default function SideBarView(props) {
               About
             </Text>
           </View> */}
-          <View style={styles.itemWrap}>
+          <TouchableOpacity
+            onPress={() => Actions.ourMission()}
+            style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               Our Mission
             </Text>
-          </View>
+          </TouchableOpacity>
           {/* <View style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               Contact Us

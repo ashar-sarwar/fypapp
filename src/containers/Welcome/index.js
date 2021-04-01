@@ -6,8 +6,9 @@ import {View, Image as RnImage, StatusBar, ImageBackground} from 'react-native';
 import PropTypes from 'prop-types';
 import {Actions} from 'react-native-router-flux';
 
-import {Images, Colors, AppStyles} from '../../theme';
+import {Images, Colors, AppStyles, Metrics} from '../../theme';
 import styles from './styles';
+import Text from './../../components/Text/index';
 
 class Welcome extends Component {
   static propTypes = {
@@ -26,6 +27,7 @@ class Welcome extends Component {
     return (
       <>
         <StatusBar hidden={true} />
+
         <ImageBackground
           source={Images.SplashScreenBackground}
           style={[styles.container]}>
@@ -39,6 +41,17 @@ class Welcome extends Component {
             bottom: 100,
             width: '100%',
           }}>
+          <View
+            style={{
+              flex: 1,
+              marginBottom: Metrics.screenHeight / 6.2,
+              marginTop: -Metrics.screenHeight / 5.7,
+              marginLeft: 12,
+            }}>
+            <Text color={Colors.white} size={60} type="bold">
+              Checkovid
+            </Text>
+          </View>
           <RnImage
             source={Images.SplashImage}
             style={{
