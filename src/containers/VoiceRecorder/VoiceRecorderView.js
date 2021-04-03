@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image as RnImage, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {Text} from '../../components';
+import {Text, ResultModal} from '../../components';
 import styles from './VoiceRecorderStyles';
 import {Fonts, AppStyles, Metrics, Images} from '../../theme';
 import {Actions} from 'react-native-router-flux';
@@ -21,6 +21,9 @@ export default function VoiceRecorderView(props) {
     handleVoiceRecording,
     setValue,
     showPlayButton,
+    disableButtons,
+    handleDiagnosis,
+    showResultModal,
   } = props;
   console.log({recordSecs});
   console.log({recordTime});
@@ -41,11 +44,19 @@ export default function VoiceRecorderView(props) {
       </TouchableOpacity>
       <View style={[AppStyles.mTop25, {paddingHorizontal: Metrics.baseMargin}]}>
         <Text
-          size={Fonts.size.xxxLarge}
+          size={Fonts.size.xxLarge}
           style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
-          COVID COUGH TESTER
+          COVID DIAGNOSIS USING COUGH SIGNALS
         </Text>
       </View>
+
+      {/* <View>
+        <Text
+          size={Fonts.size.small}
+          style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
+          Press to record
+        </Text>
+      </View> */}
       <View
         style={{
           flex: 1,
@@ -60,6 +71,13 @@ export default function VoiceRecorderView(props) {
               marginBottom: Metrics.doubleBaseMargin,
             },
           ]}>
+          <View style={AppStyles.mBottom10}>
+            <Text
+              size={Fonts.size.xSmall}
+              style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
+              Press to record
+            </Text>
+          </View>
           <TouchableOpacity
             onPress={() => {
               setValue(
@@ -96,10 +114,15 @@ export default function VoiceRecorderView(props) {
             {borderRadius: 10, borderWidth: 2, zIndex: 999},
           ]}>
           <TouchableOpacity
-            disabled={!(showPlayButton && recordSecs === 0)}
-            onPress={onStartPlay}
+            disabled={!(showPlayButton && recordSecs === 0) || disableButtons}
+            onPress={() => {
+              setValue({disableButtons: true});
+              onStartPlay();
+            }}
             style={[
-              !(showPlayButton && recordSecs === 0) && {opacity: 0.3},
+              (!(showPlayButton && recordSecs === 0) || disableButtons) && {
+                opacity: 0.3,
+              },
               {
                 width: Metrics.screenWidth / 1.2,
                 height: 60,
@@ -116,12 +139,27 @@ export default function VoiceRecorderView(props) {
           </TouchableOpacity>
         </LinearGradient>
 
-        <View style={AppStyles.mBottom25}>
+        <View style={[AppStyles.mBottom25]}>
           <TouchableOpacity
-            style={[styles.buttonWrap, {borderWidth: 2}]}
-            activeOpacity={0.8}>
+            onPress={handleDiagnosis}
+            disabled={!(showPlayButton && recordSecs === 0) || disableButtons}
+            style={[
+              styles.buttonWrap,
+              {
+                borderWidth: 2,
+              },
+            ]}
+            activeOpacity={0.97}>
             <Text
-              style={styles.btnText}
+              style={[
+                styles.btnText,
+                {
+                  opacity:
+                    !(showPlayButton && recordSecs === 0) || disableButtons
+                      ? 0.3
+                      : 1,
+                },
+              ]}
               type="semiBold"
               size={Fonts.size.medium}>
               Diagnose
@@ -129,6 +167,13 @@ export default function VoiceRecorderView(props) {
           </TouchableOpacity>
         </View>
       </View>
+      {showResultModal && (
+        <ResultModal
+          isModalOpen={showResultModal}
+          closeModal={setValue}
+          modalType="showResultModal"
+        />
+      )}
     </LinearGradient>
   );
 }

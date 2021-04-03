@@ -26,16 +26,15 @@ export default function OurMissionView(props) {
         <View style={{paddingLeft: 25, paddingRight: 10, paddingBottom: 20}}>
           <Text
             color={Colors.white}
-            size={Fonts.size.large}
+            size={Fonts.size.normal}
             type="medium"
-            style={{lineHeight: 35}}>
+            style={{lineHeight: 40}}>
             Our mission is to beat this pandemic and to make every place virus
-            free. Checkovid is our minor effort to do so, It predicts the
-            covid19 using your cough signals and tells you either you have to go
-            to hospital to test your covid or have patience and stay at home.
-            Our next target is to make such an app that will predict any disease
-            related to cough just through an application and this will really
-            help the world in this situation of the world.
+            free. Checkovid is our minor effort to do so. Checkovid predicts
+            COVID 19 using your cough signals and informs you whether you need
+            to go to the hospital to test your COVID or have patience and stay
+            at home. Our next target is to make enhancements in Checkovid, such
+            that it will predict any disease related to cough.
           </Text>
         </View>
       </ScrollView>

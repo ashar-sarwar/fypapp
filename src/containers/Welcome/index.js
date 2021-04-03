@@ -46,9 +46,9 @@ class Welcome extends Component {
               flex: 1,
               marginBottom: Metrics.screenHeight / 6.2,
               marginTop: -Metrics.screenHeight / 5.7,
-              marginLeft: 12,
+              marginLeft: Metrics.screenWidth / 9,
             }}>
-            <Text color={Colors.white} size={60} type="bold">
+            <Text color={Colors.white} size={50} type="bold">
               Checkovid
             </Text>
           </View>

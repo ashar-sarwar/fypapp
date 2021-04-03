@@ -33,6 +33,8 @@ class VoiceRecorderController extends React.Component {
 
       isIconActive: false,
       showPlayButton: false,
+      disableButtons: false,
+      showResultModal: false,
     };
 
     this.audioRecorderPlayer = new AudioRecorderPlayer();
@@ -105,7 +107,7 @@ class VoiceRecorderController extends React.Component {
     this.audioRecorderPlayer.addPlayBackListener(e => {
       if (e.current_position === e.duration) {
         console.log('finished');
-
+        this.setState({disableButtons: false});
         this.audioRecorderPlayer.stopPlayer();
       }
 
@@ -129,6 +131,8 @@ class VoiceRecorderController extends React.Component {
 
   onStopPlay = async () => {
     console.log('onStopPlay');
+    this.setState({disableButtons: false});
+
     this.audioRecorderPlayer.stopPlayer();
     this.audioRecorderPlayer.removePlayBackListener();
   };
@@ -141,6 +145,10 @@ class VoiceRecorderController extends React.Component {
       this.onStopPlay();
       this.onStartRecord();
     }
+  };
+
+  handleDiagnosis = () => {
+    this.setState({showResultModal: true});
   };
 
   setValue = (key, callback) => {
@@ -156,6 +164,8 @@ class VoiceRecorderController extends React.Component {
       playTime,
       duration,
       showPlayButton,
+      disableButtons,
+      showResultModal,
     } = this.state;
     return (
       <VoiceRecorderView
@@ -167,8 +177,11 @@ class VoiceRecorderController extends React.Component {
         duration={duration}
         showPlayButton={showPlayButton}
         isIconActive={this.state.isIconActive}
+        disableButtons={disableButtons}
+        showResultModal={showResultModal}
         setValue={this.setValue}
         handleVoiceRecording={this.handleVoiceRecording}
+        handleDiagnosis={this.handleDiagnosis}
         onStartRecord={this.onStartRecord}
         onStopRecord={this.onStopRecord}
         onStartPlay={this.onStartPlay}

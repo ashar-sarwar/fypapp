@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import Loader from './Loader';
 import EmptyStateText from './EmptyStateText';
 import SideBar from './SideBar';
+import ResultModal from './ResultModal';
 
 export {
   Button,
@@ -21,4 +22,5 @@ export {
   Loader,
   EmptyStateText,
   SideBar,
+  ResultModal,
 };

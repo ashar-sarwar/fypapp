@@ -13,8 +13,8 @@ export default StyleSheet.create({
     borderRadius: 10,
     paddingVertical: Metrics.baseMargin,
     paddingHorizontal: Metrics.screenWidth / 5,
-    backgroundColor: '#FFFAFA',
     width: Metrics.screenWidth / 1.2,
+    backgroundColor: '#FFFAFA',
   },
 
   btnText: {

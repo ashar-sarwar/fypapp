@@ -40,13 +40,13 @@ export default function SideBarView(props) {
               Contact Us
             </Text>
           </View> */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => Actions.login()}
             style={styles.itemWrap}>
             <Text type={'semiBold'} size={Fonts.size.large} color={'white'}>
               Login
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </ScrollView>
     </LinearGradient>
