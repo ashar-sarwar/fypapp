@@ -35,6 +35,7 @@ class VoiceRecorderController extends React.Component {
       showPlayButton: false,
       disableButtons: false,
       showResultModal: false,
+      showFetchLoader: false,
     };
 
     this.audioRecorderPlayer = new AudioRecorderPlayer();
@@ -148,7 +149,11 @@ class VoiceRecorderController extends React.Component {
   };
 
   handleDiagnosis = () => {
-    this.setState({showResultModal: true});
+    this.setState({showFetchLoader: true});
+
+    setTimeout(() => {
+      this.setState({showResultModal: true, showFetchLoader: false});
+    }, 2000);
   };
 
   setValue = (key, callback) => {
@@ -166,6 +171,7 @@ class VoiceRecorderController extends React.Component {
       showPlayButton,
       disableButtons,
       showResultModal,
+      showFetchLoader,
     } = this.state;
     return (
       <VoiceRecorderView
@@ -179,6 +185,7 @@ class VoiceRecorderController extends React.Component {
         isIconActive={this.state.isIconActive}
         disableButtons={disableButtons}
         showResultModal={showResultModal}
+        showFetchLoader={showFetchLoader}
         setValue={this.setValue}
         handleVoiceRecording={this.handleVoiceRecording}
         handleDiagnosis={this.handleDiagnosis}
