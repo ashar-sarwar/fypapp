@@ -1,4 +1,5 @@
 import React from 'react';
+import {readFile} from 'react-native-fs';
 
 import util from '../../util';
 import PropTypes from 'prop-types';
@@ -12,6 +13,7 @@ import AudioRecorderPlayer, {
 import VoiceRecorderView from './VoiceRecorderView';
 import {connect} from 'react-redux';
 import {Platform} from 'react-native';
+import {getResultsRequest} from '../../actions/CoughActions';
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 class VoiceRecorderController extends React.Component {
@@ -36,6 +38,8 @@ class VoiceRecorderController extends React.Component {
       disableButtons: false,
       showResultModal: false,
       showFetchLoader: false,
+      pathURL: '',
+      isCovid: false,
     };
 
     this.audioRecorderPlayer = new AudioRecorderPlayer();
@@ -91,9 +95,19 @@ class VoiceRecorderController extends React.Component {
       showPlayButton: true,
       recordSecs: 0,
     });
-
-    console.log(result);
+    this.convertToBase64(result);
+    console.log('skdsa', this.state.pathURL);
   };
+
+  convertToBase64 = async uri => {
+    await readFile(uri, 'base64')
+      .then(content => {
+        console.log({content});
+        this.setState({pathURL: content});
+      })
+      .catch(err => {});
+  };
+
   onStartPlay = async e => {
     console.log('onStartPlay');
 
@@ -150,10 +164,15 @@ class VoiceRecorderController extends React.Component {
 
   handleDiagnosis = () => {
     this.setState({showFetchLoader: true});
+    const {getResultsRequest} = this.props;
 
-    setTimeout(() => {
-      this.setState({showResultModal: true, showFetchLoader: false});
-    }, 2000);
+    getResultsRequest({data: this.state.pathURL}, res => {
+      this.setState({
+        showResultModal: true,
+        showFetchLoader: false,
+        isCovid: res,
+      });
+    });
   };
 
   setValue = (key, callback) => {
@@ -172,6 +191,7 @@ class VoiceRecorderController extends React.Component {
       disableButtons,
       showResultModal,
       showFetchLoader,
+      isCovid,
     } = this.state;
     return (
       <VoiceRecorderView
@@ -186,6 +206,7 @@ class VoiceRecorderController extends React.Component {
         disableButtons={disableButtons}
         showResultModal={showResultModal}
         showFetchLoader={showFetchLoader}
+        isCovid={isCovid}
         setValue={this.setValue}
         handleVoiceRecording={this.handleVoiceRecording}
         handleDiagnosis={this.handleDiagnosis}
@@ -202,7 +223,7 @@ class VoiceRecorderController extends React.Component {
 
 const mapStateToProps = ({}) => ({});
 
-const actions = {};
+const actions = {getResultsRequest};
 
 export default connect(
   mapStateToProps,

@@ -1,7 +1,8 @@
-import _ from "lodash";
-import Util from "../util";
+import _ from 'lodash';
+import Util from '../util';
 
-export const BASE_URL = "http://dev.veteranapp.tk/api/v1/";
+export const BASE_URL =
+  'https://talib-flaskapp.herokuapp.com/covidpredictionusingcough';
 
 export const API_TIMEOUT = 30000;
 
@@ -9,32 +10,32 @@ export const API_TIMEOUT = 30000;
 export const API_LOG = true;
 
 export const ERROR_SOMETHING_WENT_WRONG = {
-  message: "Something went wrong, Please try again later",
-  error: "Something went wrong, Please try again later"
+  message: 'Something went wrong, Please try again later',
+  error: 'Something went wrong, Please try again later',
 };
 export const ERROR_NETWORK_NOT_AVAILABLE = {
-  message: "Please connect to the working Internet",
-  error: "Please connect to the working Internet"
+  message: 'Please connect to the working Internet',
+  error: 'Please connect to the working Internet',
 };
 
 export const ERROR_TOKEN_EXPIRE = {
-  message: "Session Expired, Please login again!",
-  error: "Session Expired, Please login again!"
+  message: 'Session Expired, Please login again!',
+  error: 'Session Expired, Please login again!',
 };
 
 export const REQUEST_TYPE = {
-  GET: "get",
-  POST: "post",
-  DELETE: "delete",
-  PUT: "put"
+  GET: 'get',
+  POST: 'post',
+  DELETE: 'delete',
+  PUT: 'put',
 };
 
 // API USER ROUTES
 
-export const USER_SIGNIN = {
-  route: "login",
+export const GET_RESULTS = {
+  route: '/',
   access_token_required: false,
-  type: REQUEST_TYPE.POST
+  type: REQUEST_TYPE.POST,
 };
 
 export const callRequest = function(
@@ -43,7 +44,7 @@ export const callRequest = function(
   parameter,
   header = {},
   ApiSauce,
-  baseUrl = BASE_URL
+  baseUrl = BASE_URL,
 ) {
   // note, import of "ApiSause" has some problem, thats why I am passing it through parameters
 
@@ -54,8 +55,8 @@ export const callRequest = function(
       _header = {
         ..._header,
         ...{
-          Authorization: `Bearer ${_access_token}`
-        }
+          Authorization: `Bearer ${_access_token}`,
+        },
       };
     }
   }

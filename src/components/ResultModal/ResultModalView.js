@@ -6,7 +6,7 @@ import {Colors, Fonts, AppStyles} from '../../theme';
 import {Text, Button} from '..';
 
 export default function ResultModalView(props) {
-  const {isModalOpen, modalType, closeModal} = props;
+  const {isModalOpen, modalType, closeModal, isCovid} = props;
   return (
     <View style={styles.container}>
       <Modal
@@ -26,17 +26,17 @@ export default function ResultModalView(props) {
         style={styles.imageSelectorWrapper}>
         <View style={styles.modalStyle}>
           <Text
-            style={{color: Colors.green}}
+            style={{color: isCovid ? Colors.red : Colors.green}}
             type="bold"
             size={Fonts.size.xxLarge}>
-            NEGATIVE
+            {`${isCovid ? 'POSITIVE' : 'NEGATIVE'}`}
           </Text>
           <View style={[AppStyles.mTop20]}>
             <Text
               style={{color: Colors.black}}
               size={Fonts.size.large}
               type="medium">
-              You don't have Covid 19
+              {`${isCovid ? 'You have Covid 19' : "You don't have Covid 19"}`}
             </Text>
           </View>
           <View style={styles.submitBtnWrap}>

@@ -26,6 +26,7 @@ export default function VoiceRecorderView(props) {
     handleDiagnosis,
     showResultModal,
     showFetchLoader,
+    isCovid,
   } = props;
   console.log({recordSecs});
   console.log({recordTime});
@@ -192,6 +193,7 @@ export default function VoiceRecorderView(props) {
       </LinearGradient>
       {showResultModal && (
         <ResultModal
+          isCovid={isCovid}
           isModalOpen={showResultModal}
           closeModal={setValue}
           modalType="showResultModal"
